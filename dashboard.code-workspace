@@ -1,0 +1,28 @@
+{
+	"folders": [
+		{
+			"path": "../dashboard"
+		},
+		{
+			"path": "../img"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../taskmanager"
+		},
+		{
+			"path": "../test"
+		},
+		{
+			"path": "../todo"
+		},
+		{
+			"path": "../webalizer"
+		},
+		{
+			"path": "../xampp"
+		}
+	]
+}

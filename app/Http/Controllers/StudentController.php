@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Course;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -53,6 +55,7 @@ class StudentController extends Controller
             'age'   => $request->age,
             'stage' => $request->stage,
             'image' => $path,
+            'user_id' => Auth::id(),
         ]);
 
 
@@ -61,15 +64,26 @@ class StudentController extends Controller
             ->with('success', 'Student added successfully.');
     }
 
-    public function show(Student $student) {}
+    public function show($id)
+    {
+        $student = Student::with(['card', 'books', 'courses'])->findOrFail($id);
+
+        return view('students.show', compact('student'));
+    }
 
     public function edit(Student $student)
     {
-        return view('students.edit', compact('student'));
+        $this->authorize('update', $student);
+
+        $student->load('courses');
+        $courses = Course::all();
+
+        return view('students.edit', compact('student', 'courses'));
     }
 
     public function update(Request $request, Student $student)
     {
+        $this->authorize('update', $student);
         $request->validate([
             'name' => 'required|string|min:3|max:255',
             'email' => 'required|email|unique:students,email,' . $student->id,
@@ -89,12 +103,12 @@ class StudentController extends Controller
                 Storage::disk('public')->delete($student->image);
             }
 
-            $path = $request->file('image')->store('students', 'public');
-
-            $student->image = $path;
+            $student->image = $request->file('image')->store('students', 'public');
         }
 
         $student->save();
+
+        $student->courses()->sync($request->input('courses', []));
 
         return redirect()->route('students.index')
             ->with('success', 'Student updated successfully.');

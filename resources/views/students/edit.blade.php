@@ -99,12 +99,22 @@
             @enderror
             <div class="mb-3">
                 <label for="image" class="form-label">Upload Image</label>
-                <input type="file" class="form-control  id="image" name="image" value="{{ old('image') }}">
+                <input type="file" class="form-control"  id="image" name="image" value="{{ old('image') }}">
             </div>
             <button type="submit" class="btn btn-success">
                 Update Student
             </button>
+<h3>الكورسات</h3>
 
+@foreach($courses as $course)
+    <label>
+        <input type="checkbox"
+               name="courses[]"
+               value="{{ $course->id }}"
+               @if($student->courses->contains($course->id)) checked @endif>
+        {{ $course->name }}
+    </label>
+@endforeach
 
         </form>
 

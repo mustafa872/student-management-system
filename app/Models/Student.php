@@ -14,6 +14,7 @@ class Student extends Model
         'age',
         'stage',
         'image',
+        'user_id',
     ];
     public function card()
     {
@@ -22,5 +23,13 @@ class Student extends Model
     public function books()
     {
         return $this->hasMany(Book::class);
+    }
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

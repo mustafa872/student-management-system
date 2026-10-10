@@ -81,11 +81,15 @@
                     <option value="Fourth">Fourth</option>
 
                 </select>
-
-                <div class="mb-3">
-                    <label for="image" class="form-label">Upload Image</label>
-                    <input type="file" class="form-control  id="image" name="image" value="{{ old('image') }}">
-                </div>
+<div class="mb-3">
+    <label for="image" class="form-label">Upload Image</label>
+    <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
+</div>
+@error('image')
+    <div class="text-danger mt-1">
+        {{ $message }}
+    </div>
+@enderror
 
             </div>
             @error('stage')
@@ -96,7 +100,6 @@
             <button type="submit" class="btn btn-success">
                 Save Student
             </button>
-
 
         </form>
 
