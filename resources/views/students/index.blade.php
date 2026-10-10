@@ -92,19 +92,24 @@
     View
 </a>
 
-                            <a href="{{ route('students.edit', $student->id) }}" class="btn btn-warning btn-sm">
-                                Edit
-                            </a>
+                          @can('update', $student)
+    <a href="{{ route('students.edit', $student->id) }}" class="btn btn-warning btn-sm">
+        Edit
+    </a>
+@endcan
 
-                            <form action="{{ route('students.destroy', $student->id) }}" method="POST"
-                                class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Are you sure you want to delete this student?')">
-                                    Delete
-                                </button>
-                            </form>
+                       @can('delete', $student)
+    <form action="{{ route('students.destroy', $student->id) }}" method="POST"
+        class="d-inline">
+        @csrf
+        @method('DELETE')
+
+        <button type="submit" class="btn btn-danger btn-sm"
+            onclick="return confirm('Are you sure you want to delete this student?')">
+            Delete
+        </button>
+    </form>
+@endcan
 
                         </td>
                     </tr>

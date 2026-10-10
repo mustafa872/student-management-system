@@ -115,6 +115,7 @@ class StudentController extends Controller
     }
     public function destroy(Student $student)
     {
+        $this->authorize('delete', $student);
         if ($student->image) {
             Storage::disk('public')->delete($student->image);
         }
