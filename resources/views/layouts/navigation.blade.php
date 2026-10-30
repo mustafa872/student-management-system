@@ -38,6 +38,12 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
+             <x-nav-link :href="route('students.index')"
+               :active="request()->routeIs('students.*')">
+               {{ __('Students') }}
+               </x-nav-link>
+
+               
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf

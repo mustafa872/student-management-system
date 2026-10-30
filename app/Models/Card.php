@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Student;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Card extends Model
 {
@@ -12,7 +12,10 @@ class Card extends Model
         'student_id',
     ];
 
-    public function student()
+    /**
+     * A card belongs to one student.
+     */
+    public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
     }

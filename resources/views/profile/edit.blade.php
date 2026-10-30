@@ -1,29 +1,32 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
-            </div>
+@extends('layouts.app')
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
-            </div>
+@section('title', 'الملف الشخصي')
+@section('page-title', 'الملف الشخصي')
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
-            </div>
-        </div>
+@section('content')
+
+    {{-- Page Header --}}
+    <div class="mb-4">
+        <h4 class="fw-bold mb-1">إعدادات الحساب</h4>
+        <p class="text-secondary mb-0">
+            إدارة معلوماتك الشخصية وكلمة المرور وإعدادات الحساب.
+        </p>
     </div>
-</x-app-layout>
+
+    {{-- Profile Information --}}
+    <div class="mb-4">
+        @include('profile.partials.update-profile-information-form')
+    </div>
+
+    {{-- Update Password --}}
+    <div class="mb-4">
+        @include('profile.partials.update-password-form')
+    </div>
+
+    {{-- Delete Account --}}
+    <div>
+        @include('profile.partials.delete-user-form')
+    </div>
+
+@endsection

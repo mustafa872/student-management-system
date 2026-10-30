@@ -4,36 +4,35 @@ namespace App\Policies;
 
 use App\Models\Student;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class StudentPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * Allow authenticated users to view the students list.
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Allow authenticated users to view student details.
      */
     public function view(User $user, Student $student): bool
     {
-        return false;
+        return true;
     }
 
     /**
-     * Determine whether the user can create models.
+     * Allow authenticated users to create students.
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
-     * Determine whether the user can update the model.
+     * Only the student owner can update the student.
      */
     public function update(User $user, Student $student): bool
     {
@@ -41,24 +40,18 @@ class StudentPolicy
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Only the student owner can delete the student.
      */
     public function delete(User $user, Student $student): bool
     {
         return $user->id === $student->user_id;
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     */
     public function restore(User $user, Student $student): bool
     {
         return false;
     }
 
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
     public function forceDelete(User $user, Student $student): bool
     {
         return false;

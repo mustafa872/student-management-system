@@ -1,0 +1,11 @@
+mustafamajid9522@gmail.com 
+mustafamajid9522@gmail.com
+pass MyNewPassword123 
+
+$user2 = \App\Models\User::create                 
+.     'name' => 'Policy Tester',                      
+.     'email' => 'policytester@example.com',          
+.     'password' => \Illuminate\Support\Facades\Hash::
+make('TestPassword123!')  
+
+
