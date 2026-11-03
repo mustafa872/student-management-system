@@ -8,6 +8,24 @@ use App\Models\User;
 class StudentPolicy
 {
     /**
+     * Perform pre-authorization checks.
+     */
+    public function before(User $user, string $ability): ?bool
+    {
+        if ($user->is_blocked) {
+            return false;
+        }
+
+        if (
+            $user->is_admin &&
+            in_array($ability, ['update', 'delete'], true)
+        ) {
+            return true;
+        }
+
+        return null;
+    }
+    /**
      * Allow authenticated users to view the students list.
      */
     public function viewAny(User $user): bool

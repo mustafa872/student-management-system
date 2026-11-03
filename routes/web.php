@@ -23,7 +23,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'not.blocked'])
     ->name('dashboard');
 
 /*
@@ -32,7 +32,7 @@ Route::get('/dashboard', function () {
 |--------------------------------------------------------------------------
 */
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'not.blocked'])->group(function () {
 
     // Profile Routes
     Route::get('/profile', [ProfileController::class, 'edit'])
