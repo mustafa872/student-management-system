@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StoreStudentRequest;
 
 class StudentController extends Controller
 {
@@ -31,35 +32,10 @@ class StudentController extends Controller
         return view('students.create', compact('courses'));
     }
 
-    public function store(Request $request)
+    public function store(StoreStudentRequest  $request)
     {
-        $this->authorize('create', Student::class);
 
-        $validated = $request->validate([
-            'name' => 'required|string|min:3|max:255',
-            'email' => 'required|email|max:255|unique:students,email',
-            'age' => 'required|integer|min:1|max:100',
-            'stage' => 'required|in:First,Second,Third,Fourth',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-
-            'courses' => 'nullable|array',
-            'courses.*' => 'integer|exists:courses,id',
-        ], [
-            'name.required' => 'يرجى إدخال اسم الطالب.',
-            'name.min' => 'يجب أن يتكون الاسم من 3 أحرف على الأقل.',
-            'email.required' => 'يرجى إدخال البريد الإلكتروني.',
-            'email.email' => 'صيغة البريد الإلكتروني غير صحيحة.',
-            'email.unique' => 'هذا البريد الإلكتروني مستخدم مسبقًا.',
-            'age.required' => 'يرجى إدخال العمر.',
-            'age.integer' => 'العمر يجب أن يكون رقمًا صحيحًا.',
-            'stage.required' => 'يرجى اختيار المرحلة.',
-            'image.required' => 'يرجى اختيار صورة الطالب.',
-            'image.image' => 'الملف المختار يجب أن يكون صورة.',
-            'image.mimes' => 'الصورة يجب أن تكون بصيغة JPG أو PNG.',
-            'image.max' => 'حجم الصورة يجب ألا يتجاوز 2 ميغابايت.',
-            'courses.array' => 'اختيار المواد غير صالح.',
-            'courses.*.exists' => 'إحدى المواد المختارة غير موجودة.',
-        ]);
+        $validated = $request->validated();
 
         $path = $request->file('image')->store('students', 'public');
 
