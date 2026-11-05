@@ -30,7 +30,7 @@ class StoreStudentRequest extends FormRequest
             'stage' => ['required', 'in:First,Second,Third,Fourth'],
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
             'courses' => ['nullable', 'array'],
-            'courses.*' => ['required', 'integer', 'exists:courses,id'],
+            'courses.*' => ['integer', 'exists:courses,id'],
 
         ];
     }
