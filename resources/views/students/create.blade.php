@@ -61,7 +61,7 @@
                     name="email"
                     value="{{ old('email') }}"
                     class="form-control @error('email') is-invalid @enderror"
-                    required
+                    
                     maxlength="255"
                     placeholder="example@email.com"
                 >
@@ -80,7 +80,7 @@
                     id="age"
                     name="age"
                     value="{{ old('age') }}"
-                    min="1"
+                    min="6"
                     max="100"
                     class="form-control @error('age') is-invalid @enderror"
                     required
