@@ -17,7 +17,7 @@
     </a>
 </div>
 
-<form action="{{ route('students.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('students.store') }}" method="POST" enctype="multipart/form-data" novalidate>
     @csrf
 
     {{-- المعلومات الأساسية --}}
