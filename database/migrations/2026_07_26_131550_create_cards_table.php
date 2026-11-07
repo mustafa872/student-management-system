@@ -15,7 +15,6 @@ return new class extends Migration
             $table->string('card_number')->unique();
 
             $table->foreignId('student_id')
-                ->unique()
                 ->constrained('students')
                 ->cascadeOnDelete();
 
