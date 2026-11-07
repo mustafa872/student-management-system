@@ -50,22 +50,33 @@ test('email verification status is unchanged when the email address is unchanged
     $this->assertNotNull($user->refresh()->email_verified_at);
 });
 
+
 test('user can delete their account', function () {
     $user = User::factory()->create();
+    $recipient = User::factory()->create();
 
     $response = $this
         ->actingAs($user)
         ->delete('/profile', [
             'password' => 'password',
+            'transfer_to_user_id' => $recipient->id,
         ]);
 
     $response
         ->assertSessionHasNoErrors()
         ->assertRedirect('/');
 
+
+    $this->assertDatabaseMissing('users', [
+        'id' => $user->id,
+    ]);
+
     $this->assertGuest();
+
     $this->assertNull($user->fresh());
+    $this->assertNotNull($recipient->fresh());
 });
+
 
 test('correct password must be provided to delete account', function () {
     $user = User::factory()->create();
