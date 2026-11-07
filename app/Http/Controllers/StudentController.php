@@ -91,6 +91,50 @@ class StudentController extends Controller
     }
 
 
+    public function update(UpdateStudentRequest $request, Student $student)
+    {
+        $validated = $request->validated();
+
+        $oldImage = $student->image;
+        $newPath = null;
+
+        if ($request->hasFile('image')) {
+            $newPath = $request->file('image')->store('students', 'public');
+        }
+
+        try {
+            DB::transaction(function () use ($validated, $student, $newPath) {
+
+                if ($newPath) {
+                    $student->image = $newPath;
+                }
+
+                $student->name = $validated['name'];
+                $student->email = $validated['email'];
+                $student->age = $validated['age'];
+                $student->stage = $validated['stage'];
+
+                $student->save();
+
+                $student->courses()->sync($validated['courses'] ?? []);
+            });
+        } catch (\Throwable $exception) {
+            if ($newPath) {
+                Storage::disk('public')->delete($newPath);
+            }
+
+            throw $exception;
+        }
+
+        if ($newPath && $oldImage) {
+            Storage::disk('public')->delete($oldImage);
+        }
+
+        return redirect()
+            ->route('students.index')
+            ->with('success', 'Student updated successfully.');
+    }
+
 
     public function destroy(Student $student)
     {
