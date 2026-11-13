@@ -46,6 +46,18 @@ Route::middleware(['auth', 'not.blocked'])->group(function () {
 
     // Student Management Routes
     Route::resource('students', StudentController::class);
+    Route::post('/notifications/{notification}/read', function (string $notification) {
+
+        abort_unless(auth()->user()->is_admin, 403);
+
+        $notification = auth()->user()
+            ->notifications()
+            ->findOrFail($notification);
+
+        $notification->markAsRead();
+
+        return back();
+    })->name('notifications.read');
 });
 
 /*

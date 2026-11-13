@@ -492,6 +492,103 @@
         @auth
             <div class="user-info">
 
+@if(auth()->user()->is_admin)
+
+    @php
+        $unreadCount = auth()->user()
+            ->unreadNotifications()
+            ->count();
+
+        $notifications = auth()->user()
+            ->notifications()
+            ->latest()
+            ->take(5)
+            ->get();
+    @endphp
+
+    <div class="dropdown">
+
+        <button
+            class="btn btn-light position-relative"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            aria-label="عرض الإشعارات"
+        >
+            <i class="bi bi-bell fs-5"></i>
+
+            @if($unreadCount > 0)
+                <span
+                    class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-danger"
+                >
+                    {{ $unreadCount }}
+                </span>
+            @endif
+        </button>
+
+        <div
+            class="dropdown-menu shadow border-0 p-3"
+            style="width: 320px; max-width: 90vw;"
+        >
+            <h6 class="fw-bold mb-3">
+                الإشعارات
+            </h6>
+
+           
+@forelse($notifications as $notification)
+
+    <div class="border-bottom py-2">
+
+        <div class="fw-bold small">
+            {{ $notification->data['title'] ?? 'إشعار جديد' }}
+        </div>
+
+        <div class="small text-muted mb-2">
+            {{ $notification->data['student_name'] ?? '' }}
+        </div>
+
+        @if(is_null($notification->read_at))
+
+            <form
+                method="POST"
+                action="{{ route('notifications.read', $notification->id) }}"
+            >
+                @csrf
+
+                <button
+                    type="submit"
+                    class="btn btn-sm btn-outline-primary"
+                >
+                    <i class="bi bi-check2-circle"></i>
+                    تحديد كمقروء
+                </button>
+            </form>
+
+        @else
+
+            <span class="badge bg-secondary">
+                تمت القراءة
+            </span>
+
+        @endif
+
+    </div>
+
+@empty
+
+    <p class="text-muted small mb-0">
+        لا توجد إشعارات حالياً.
+    </p>
+
+@endforelse
+
+
+        </div>
+    </div>
+
+@endif
+
+
                 <div class="text-start d-none d-sm-block">
                     <div class="user-name">{{ auth()->user()->name }}</div>
                     <div class="user-role">مستخدم النظام</div>

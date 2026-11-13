@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
+use App\Events\StudentCreated;
+
 
 class StudentController extends Controller
 {
@@ -28,20 +30,24 @@ class StudentController extends Controller
     {
         $this->authorize('create', Student::class);
 
+
         $courses = Course::orderBy('name')->get();
 
         return view('students.create', compact('courses'));
     }
 
-    public function store(StoreStudentRequest  $request)
-    {
 
+    public function store(StoreStudentRequest $request)
+    {
+        // 1. Get validated student data.
         $validated = $request->validated();
 
+        // 2. Upload the student image.
         $path = $request->file('image')->store('students', 'public');
 
         try {
-            DB::transaction(function () use ($validated, $path) {
+            // 3. Save student and courses in one transaction.
+            $student = DB::transaction(function () use ($validated, $path) {
 
                 $student = Student::create([
                     'name' => $validated['name'],
@@ -52,18 +58,29 @@ class StudentController extends Controller
                     'user_id' => Auth::id(),
                 ]);
 
+                // 4. Attach selected courses (if any).
                 $student->courses()->sync($validated['courses'] ?? []);
+
+                // 5. Return the created student.
+                return $student;
             });
         } catch (\Throwable $exception) {
+
+            // 6. Delete uploaded image if database operation fails.
             Storage::disk('public')->delete($path);
 
             throw $exception;
         }
 
+        // 7. Dispatch event after successful database transaction.
+        StudentCreated::dispatch($student);
+
+        // 8. Redirect to the students page.
         return redirect()
             ->route('students.index')
             ->with('success', 'Student added successfully.');
     }
+
 
     public function show(Student $student)
     {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2026 at 04:22 PM
+-- Generation Time: Nov 10, 2026 at 03:51 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -134,7 +134,9 @@ INSERT INTO `course_student` (`id`, `student_id`, `course_id`, `created_at`, `up
 (7, 4, 1, NULL, NULL),
 (8, 4, 2, NULL, NULL),
 (9, 6, 1, NULL, NULL),
-(10, 6, 2, NULL, NULL);
+(10, 6, 2, NULL, NULL),
+(11, 8, 1, NULL, NULL),
+(12, 8, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -254,7 +256,8 @@ CREATE TABLE `sessions` (
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
 ('3cI1czAvOhMf2w1ClDy9efnvRBSnNhD9HsLmWd6D', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiR3lMUWhxVWI0RlB4c21tOVBiRzV5WVl1T1o3MlVNVEpKeHVNdTNLNSI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjM3OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvc3R1ZGVudHMvY3JlYXRlIjtzOjU6InJvdXRlIjtzOjE1OiJzdHVkZW50cy5jcmVhdGUiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1793895691),
 ('8vSmb5d1k7DvTlUpB2eLZP7fPgPabOrK37Ea7VN7', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiMVE5QktUWnU4Rjd5QWh2UG1kdzlZNnVqbXZXQnBaWERHMFROQkJvQiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjk6Il9wcmV2aW91cyI7YToyOntzOjM6InVybCI7czozMDoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3N0dWRlbnRzIjtzOjU6InJvdXRlIjtzOjE0OiJzdHVkZW50cy5pbmRleCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1793999693),
-('Noq6ARdIMbC36juzmgQAzBIxUMCeqlMDgVbjfzQ1', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiVUtlUG5rR3hmdHNtNDVhVVl5V0o4SlBJN2pXd3prT0JNNVJyWEdnNyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjMwOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvc3R1ZGVudHMiO3M6NToicm91dGUiO3M6MTQ6InN0dWRlbnRzLmluZGV4Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1793921416);
+('Noq6ARdIMbC36juzmgQAzBIxUMCeqlMDgVbjfzQ1', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiVUtlUG5rR3hmdHNtNDVhVVl5V0o4SlBJN2pXd3prT0JNNVJyWEdnNyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjMwOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvc3R1ZGVudHMiO3M6NToicm91dGUiO3M6MTQ6InN0dWRlbnRzLmluZGV4Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1793921416),
+('TUD2WJMWY2hFOwQetNRI6yVwWgz6g8HP2At9dUir', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiVlRJeUJxUmN6bWpMNEVic2NIelE4bzhJSnBIQmhFN2lBb09KaGc5OCI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjk6Il9wcmV2aW91cyI7YToyOntzOjM6InVybCI7czozNzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3N0dWRlbnRzP3BhZ2U9MSI7czo1OiJyb3V0ZSI7czoxNDoic3R1ZGVudHMuaW5kZXgiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1794162671);
 
 -- --------------------------------------------------------
 
@@ -285,7 +288,8 @@ INSERT INTO `students` (`id`, `name`, `email`, `age`, `stage`, `image`, `created
 (4, 'mustafa majid', 'mustafamajid915@gmail.com', 11, 'Second', 'students/TRLl5Vkl17IHQlhCN2hp46d9CDrEkjHmbJRVXt19.jpg', '2026-09-21 17:49:59', '2026-09-26 12:59:27', 1),
 (5, 'mustafa majid Hadi', 'mustafamajid95d@gmail.com', 23, 'Third', 'students/OVP2Xdr9JS5trVSFgigVg73JCU0KFIc6BbQNfVcO.png', '2026-10-11 17:40:00', '2026-10-11 17:40:00', 1),
 (6, 'Hayder ali', 'hayder_23@gmail.com', 23, 'First', 'students/FNN1wauQQn85UqHnJrppxotXLpaBHCVyFFGX7bea.png', '2026-10-30 10:39:01', '2026-10-30 10:39:01', 1),
-(7, 'jouyr mustafa', 'abc@gmail.com', 12, 'Second', 'students/ulvDfhO5pLkOsC84lKGdTDwOhm8YDrRP3Eco51fQ.png', '2026-11-05 13:18:12', '2026-11-06 18:14:52', 1);
+(7, 'jouyr mustafa', 'abc@gmail.com', 12, 'Second', 'students/ulvDfhO5pLkOsC84lKGdTDwOhm8YDrRP3Eco51fQ.png', '2026-11-05 13:18:12', '2026-11-06 18:14:52', 1),
+(8, 'mustafa majid Hadis', 'test32@gmail.com', 34, 'Third', 'students/OaZQkPd4jN5lUw7vaHA8pmRwI3TCfRv9vmZEF7Ve.jpg', '2026-11-08 15:30:56', '2026-11-08 15:30:56', 1);
 
 -- --------------------------------------------------------
 
@@ -442,7 +446,7 @@ ALTER TABLE `courses`
 -- AUTO_INCREMENT for table `course_student`
 --
 ALTER TABLE `course_student`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -466,7 +470,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
